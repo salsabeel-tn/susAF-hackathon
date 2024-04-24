@@ -7,21 +7,12 @@
 <style>
   .pentagon-container {
     position: relative;
-    width: 80vw;
-    height: 80vh;
-    margin: 10vh auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
   }
 
-  .pentagon {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-
-  svg.pentagon-shape {
+  #pentagonCanvas {
     width: 100%;
     height: 100%;
   }
@@ -37,47 +28,45 @@
     transform: translate(-50%, -50%);
     cursor: grab;
   }
-
-  .dimension-label {
-    position: absolute;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: black;
-    transform: translate(-50%, -50%);
-  }
-
-  .dimension-label.product {
-    top: 50%;
-    left: 50%;
-  }
-
-  /* Adjusted positions for labels */
-  .dimension-label.individual { top: 10%; left: 50%; }
-  .dimension-label.social { top: 35%; left: 10%; }
-  .dimension-label.economic { bottom: 10%; left: 50%; }
-  .dimension-label.environmental { bottom: 10%; right: 10%; }
-  .dimension-label.technical { bottom: 35%; right: 10%; }
 </style>
 </head>
 <body>
 
 <div class="pentagon-container">
-  <div class="pentagon">
-    <svg class="pentagon-shape" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="50,10 20,35 30,90 70,90 80,35"
-               stroke="grey" stroke-width="0.5" fill="none"/>
-      <text x="50" y="8" text-anchor="middle" font-size="2">Individual</text>
-      <text x="17" y="35" text-anchor="end" font-size="2">Social</text>
-      <text x="50" y="95" text-anchor="middle" font-size="2">Economic</text>
-      <text x="83" y="35" text-anchor="start" font-size="2">Technical</text>
-      <text x="17" y="62" text-anchor="end" font-size="2" dy=".3em">Environmental</text>
-    </svg>
-    <div class="dimension-label product">Product</div>
-  </div>
+  <canvas id="pentagonCanvas"></canvas>
   <div class="card" id="draggableCard"></div>
 </div>
 
 <script>
+  const canvas = document.getElementById('pentagonCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+
+  // Function to draw a pentagon with a specific fill color
+  function drawPentagon(ctx, center, size, fillColor) {
+    const angle = Math.PI * 2 / 5;
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+      ctx.lineTo(
+        center.x + size * Math.cos(angle * i - Math.PI / 2),
+        center.y + size * Math.sin(angle * i - Math.PI / 2)
+      );
+    }
+    ctx.closePath();
+    ctx.fillStyle = fillColor;
+    ctx.fill();
+    ctx.strokeStyle = 'grey';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Draw the main pentagon and two sub pentagons with different light colors
+  drawPentagon(ctx, {x: canvas.width / 2, y: canvas.height / 2}, 200, 'rgba(255, 182, 193, 0.5)'); 
+  drawPentagon(ctx, {x: canvas.width / 2, y: canvas.height / 2}, 150, 'rgba(173, 216, 230, 0.5)'); 
+  drawPentagon(ctx, {x: canvas.width / 2, y: canvas.height / 2}, 100, 'rgba(144, 238, 144, 0.5)'); 
+
+  // Drag and drop functionality
   const card = document.getElementById('draggableCard');
   let active = false;
   let currentX;
@@ -87,9 +76,15 @@
   let xOffset = 0;
   let yOffset = 0;
 
-  card.addEventListener('mousedown', dragStart, false);
-  window.addEventListener('mouseup', dragEnd, false);
-  window.addEventListener('mousemove', drag, false);
+  card.addEventListener('mousedown', function(e) {
+    dragStart(e);
+  }, false);
+  window.addEventListener('mouseup', function(e) {
+    dragEnd(e);
+  }, false);
+  window.addEventListener('mousemove', function(e) {
+    drag(e);
+  }, false);
 
   function dragStart(e) {
     initialX = e.clientX - xOffset;
@@ -110,13 +105,10 @@
   function drag(e) {
     if (active) {
       e.preventDefault();
-      
       currentX = e.clientX - initialX;
       currentY = e.clientY - initialY;
-
       xOffset = currentX;
       yOffset = currentY;
-
       setTranslate(currentX, currentY, card);
     }
   }
