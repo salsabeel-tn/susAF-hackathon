@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { DropTarget, DragSource } from 'react-dnd';
-
+import PentagonDiagram from './PentagonDiagram';
 import Cards from './Cards';
+
 
 const listSource = {
   beginDrag(props) {
@@ -82,6 +83,7 @@ export default class CardsContainer extends Component {
           stopScrolling={this.props.stopScrolling}
           isScrolling={this.props.isScrolling}
         />
+        <PentagonDiagram />
       </div>
     ));
   }}

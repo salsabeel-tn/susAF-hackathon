@@ -29,6 +29,14 @@ module.exports = {
       exclude: /node_modules/,
       include: path.join(__dirname, 'src')
     },
+          {
+            test: /\.css$/,
+            loader : "css-loader",
+            use: [ 
+              'style-loader', 'css-loader'
+          ],
+          },
+    
     {
       test: /\.styl$/,
       loader: 'style-loader!css-loader!stylus-loader'
