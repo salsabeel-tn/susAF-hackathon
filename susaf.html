@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pentagon Diagram with Draggable Card</title>
+<style>
+  .pentagon-container {
+    position: relative;
+    width: 80vw;
+    height: 80vh;
+    margin: 10vh auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pentagon {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  svg.pentagon-shape {
+    width: 100%;
+    height: 100%;
+  }
+
+  .card {
+    width: 50px;
+    height: 50px;
+    background-color: gold;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: grab;
+  }
+
+  .dimension-label {
+    position: absolute;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: black;
+    transform: translate(-50%, -50%);
+  }
+
+  .dimension-label.product {
+    top: 50%;
+    left: 50%;
+  }
+
+  /* Adjusted positions for labels */
+  .dimension-label.individual { top: 10%; left: 50%; }
+  .dimension-label.social { top: 35%; left: 10%; }
+  .dimension-label.economic { bottom: 10%; left: 50%; }
+  .dimension-label.environmental { bottom: 10%; right: 10%; }
+  .dimension-label.technical { bottom: 35%; right: 10%; }
+</style>
+</head>
+<body>
+
+<div class="pentagon-container">
+  <div class="pentagon">
+    <svg class="pentagon-shape" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,10 20,35 30,90 70,90 80,35"
+               stroke="grey" stroke-width="0.5" fill="none"/>
+      <text x="50" y="8" text-anchor="middle" font-size="2">Individual</text>
+      <text x="17" y="35" text-anchor="end" font-size="2">Social</text>
+      <text x="50" y="95" text-anchor="middle" font-size="2">Economic</text>
+      <text x="83" y="35" text-anchor="start" font-size="2">Technical</text>
+      <text x="17" y="62" text-anchor="end" font-size="2" dy=".3em">Environmental</text>
+    </svg>
+    <div class="dimension-label product">Product</div>
+  </div>
+  <div class="card" id="draggableCard"></div>
+</div>
+
+<script>
+  const card = document.getElementById('draggableCard');
+  let active = false;
+  let currentX;
+  let currentY;
+  let initialX;
+  let initialY;
+  let xOffset = 0;
+  let yOffset = 0;
+
+  card.addEventListener('mousedown', dragStart, false);
+  window.addEventListener('mouseup', dragEnd, false);
+  window.addEventListener('mousemove', drag, false);
+
+  function dragStart(e) {
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
+    if (e.target === card) {
+      active = true;
+      card.style.cursor = 'grabbing';
+    }
+  }
+
+  function dragEnd(e) {
+    initialX = currentX;
+    initialY = currentY;
+    active = false;
+    card.style.cursor = 'grab';
+  }
+
+  function drag(e) {
+    if (active) {
+      e.preventDefault();
+      
+      currentX = e.clientX - initialX;
+      currentY = e.clientY - initialY;
+
+      xOffset = currentX;
+      yOffset = currentY;
+
+      setTranslate(currentX, currentY, card);
+    }
+  }
+
+  function setTranslate(xPos, yPos, el) {
+    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+  }
+</script>
+
+</body>
+</html>
