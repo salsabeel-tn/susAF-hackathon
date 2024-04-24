@@ -65,9 +65,12 @@ export default class CardsContainer extends Component {
   render() {
     const { connectDropTarget, connectDragSource, item, x, moveCard, isDragging } = this.props;
     const opacity = isDragging ? 0.5 : 1;
-
+  
+    // Define the desired width of the list
+    const listWidth = 500; // list width
+  
     return connectDragSource(connectDropTarget(
-      <div className="desk" style={{ opacity }}>
+      <div className="desk" style={{ opacity, width: listWidth }}>
         <div className="desk-head">
           <div className="desk-name">{item.name}</div>
         </div>
@@ -81,5 +84,4 @@ export default class CardsContainer extends Component {
         />
       </div>
     ));
-  }
-}
+  }}
