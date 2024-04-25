@@ -4,119 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pentagon Diagram with Draggable Card</title>
-<style>
-  .pentagon-container {
-    position: relative;
-    width: 500px;
-    height: 500px;
-    margin: 0 auto;
-  }
-
-  #pentagonCanvas {
-    width: 100%;
-    height: 100%;
-  }
-
-  .card {
-    width: 50px;
-    height: 50px;
-    background-color: gold;
-    border-radius: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: grab;
-  }
-</style>
+<link rel="stylesheet" href="susaf.css">
 </head>
 <body>
 
 <div class="pentagon-container">
+  <div >hi click me pls</div>
   <canvas id="pentagonCanvas"></canvas>
   <div class="card" id="draggableCard"></div>
 </div>
 
-<script>
-  const canvas = document.getElementById('pentagonCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-
-  // Function to draw a pentagon with a specific fill color
-  function drawPentagon(ctx, center, size, fillColor) {
-    const angle = Math.PI * 2 / 5;
-    ctx.beginPath();
-    for (let i = 0; i < 5; i++) {
-      ctx.lineTo(
-        center.x + size * Math.cos(angle * i - Math.PI / 2),
-        center.y + size * Math.sin(angle * i - Math.PI / 2)
-      );
-    }
-    ctx.closePath();
-    ctx.fillStyle = fillColor;
-    ctx.fill();
-    ctx.strokeStyle = 'grey';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-  }
-
-  // Draw the main pentagon and two sub pentagons with different light colors
-  drawPentagon(ctx, {x: canvas.width / 2, y: canvas.height / 2}, 200, 'rgba(255, 182, 193, 0.5)'); 
-  drawPentagon(ctx, {x: canvas.width / 2, y: canvas.height / 2}, 150, 'rgba(173, 216, 230, 0.5)'); 
-  drawPentagon(ctx, {x: canvas.width / 2, y: canvas.height / 2}, 100, 'rgba(144, 238, 144, 0.5)'); 
-
-  // Drag and drop functionality
-  const card = document.getElementById('draggableCard');
-  let active = false;
-  let currentX;
-  let currentY;
-  let initialX;
-  let initialY;
-  let xOffset = 0;
-  let yOffset = 0;
-
-  card.addEventListener('mousedown', function(e) {
-    dragStart(e);
-  }, false);
-  window.addEventListener('mouseup', function(e) {
-    dragEnd(e);
-  }, false);
-  window.addEventListener('mousemove', function(e) {
-    drag(e);
-  }, false);
-
-  function dragStart(e) {
-    initialX = e.clientX - xOffset;
-    initialY = e.clientY - yOffset;
-    if (e.target === card) {
-      active = true;
-      card.style.cursor = 'grabbing';
-    }
-  }
-
-  function dragEnd(e) {
-    initialX = currentX;
-    initialY = currentY;
-    active = false;
-    card.style.cursor = 'grab';
-  }
-
-  function drag(e) {
-    if (active) {
-      e.preventDefault();
-      currentX = e.clientX - initialX;
-      currentY = e.clientY - initialY;
-      xOffset = currentX;
-      yOffset = currentY;
-      setTranslate(currentX, currentY, card);
-    }
-  }
-
-  function setTranslate(xPos, yPos, el) {
-    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-  }
+<script src="susaf.js">
 </script>
-
 </body>
 </html>
