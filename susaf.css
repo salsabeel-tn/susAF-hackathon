@@ -5,42 +5,66 @@
     margin: 0 auto;
   }
 
-  #pentagonCanvas {
-    width: 100%;
-    height: 100%;
-  }
-
-  .card {
-    width: 50px;
-    height: 50px;
-    background-color: gold;
-    border-radius: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: grab;
-  }
-
-  .draggable-card {
-    min-width: 100px;
-    min-height: 100px;
-    background-color: gold;
-    border-radius: 10px;
-    display: inline-flex;
-    flex-direction: column;
-  }
-
-  .svg-pentagon {
-    width: 250px;
-    height: 250px;
-    margin: auto;
-    overflow: hidden;
+#pentagonCanvas {
+  width: 100%;
+  height: 100%;
 }
+
+.card {
+  width: 50px;
+  height: 50px;
+  background-color: gold;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+}
+
+.draggable-card {
+  min-width: 100px;
+  min-height: 100px;
+  background-color: gold;
+  border-radius: 10px;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.svg-pentagon {
+  width: 250px;
+  height: 250px;
+  margin: auto;
+  overflow: hidden;
+}
+
 .svg-pentagon canvas {
     margin: -125px 0 0 -125px;
     -webkit-transform: scale(0.5);
     -moz-transform: scale(0.5);
     -o-transform: scale(0.5);
     transform: scale(0.5);
+}
+
+.create-card-button {
+  border: 0;
+  transition: 0.5s;
+  z-index: 1;
+  min-width: 15rem;
+  padding: 1rem 2rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: #041a2f;
+  color: #ffffff;
+  margin-top: 3rem;
+  margin-left: 3rem;
+}
+
+.create-card-button:hover {
+  box-shadow: inset -7.5rem 0 0 0 var(--primary),
+    inset 7.5rem 0 0 0 var(--primary);
 }
