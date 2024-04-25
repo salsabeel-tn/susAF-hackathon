@@ -68,14 +68,11 @@ function drawPoints(coordinates) {
 }
 
 var coordinates = [
-    { x: 1650, y: 450 },
-    { x: 1600, y: 450 },
-    { x: 1700, y: 450 },
-    { x: 1500, y: 300 },
-    { x: 1620, y: 380 },
-    { x: 1610, y: 500 },
-    { x: 1605, y: 500 },
-    { x: 1620, y: 500 },
+    { x: 1700, y: 400 },
+    { x: 1520, y: 300 },
+    { x: 1700, y: 300 },
+    { x: 1500, y: 430 },
+    { x: 1600, y: 490 },
     
     // Add more coordinates as needed
 ];
