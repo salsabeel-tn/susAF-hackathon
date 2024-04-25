@@ -28,13 +28,109 @@ const canvas = document.getElementById('pentagonCanvas');
   drawPentagon(ctx, {x: canvas.width * 0.2, y: canvas.height * 0.5}, 150, `rgba(255, 182, 193, 0.5)`); 
   drawPentagon(ctx, {x: canvas.width * 0.2, y: canvas.height * 0.5}, 100, `rgba(255, 182, 193, 0.3)`);
 
-  drawPentagon(ctx, {x: canvas.width * 0.5, y: canvas.height * 0.5}, 200, 'rgba(173, 216, 230, 0.8)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.5, y: canvas.height * 0.5}, 150, 'rgba(173, 216, 230, 0.5)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.5, y: canvas.height * 0.5}, 100, 'rgba(173, 216, 230, 0.3)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.4, y: canvas.height * 0.5}, 200, 'rgba(173, 216, 230, 0.8)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.4, y: canvas.height * 0.5}, 150, 'rgba(173, 216, 230, 0.5)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.4, y: canvas.height * 0.5}, 100, 'rgba(173, 216, 230, 0.3)'); 
 
-  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 200, 'rgba(144, 238, 144, 0.8)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 150, 'rgba(144, 238, 144, 0.5)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 100, 'rgba(144, 238, 144, 0.3)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 200, 'rgba(144, 238, 144, 0.8)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 150, 'rgba(144, 238, 144, 0.5)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 100, 'rgba(144, 238, 144, 0.3)'); 
+
+  
+function drawPath(x, y, n, r, style) {
+    var i, ang;
+    ang = Math.PI * 2 / n; // Rotation angle
+    ctx.save();
+    // Set style
+    for (var styleList in style) {
+        ctx[styleList] = style[styleList];
+    }
+    x_updated = canvas.width * 0.8  ;
+    y_updated = canvas.height * 0.5;
+    console.log(x_updated, y_updated);
+    ctx.translate(x_updated, y_updated);
+    ctx.moveTo(0, -r);
+    ctx.beginPath();
+    for (i = 0; i < n; i++) {
+        ctx.rotate(ang);
+        ctx.lineTo(0, -r);
+    }
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill();
+    ctx.restore();
+}
+
+function drawPoints(coordinates) {
+    ctx.save(); // Save the current canvas state
+    // Iterate over each coordinate
+    for (var i = 0; i < coordinates.length; i++) {
+        var x = coordinates[i].x; // Get the x-coordinate from the coordinates array
+        var y = coordinates[i].y; // Get the y-coordinate from the coordinates array
+        var size = (i + 1) * 5; // Adjust the size of the point based on its index
+        
+        // Draw a radial gradient from the center to the edge of the point
+        var gradient = ctx.createRadialGradient(x, y, 0, x, y, size);
+        gradient.addColorStop(0, 'rgba(127, 168, 77, 0.4)'); // Center color (red)
+        gradient.addColorStop(1, 'rgba(96, 122, 63, 0.8)'); // Edge color (transparent)
+        
+        // Set the fill style to the gradient
+        ctx.fillStyle = gradient;
+        
+        // Draw a plain circle at the specified coordinates
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+    }
+    ctx.restore(); // Restore the saved canvas state
+}
+
+drawPath(250, 250, 5, 200, {  // Increase the radius to 300
+  fillStyle: 'rgba(243, 231, 206, 1)',
+  lineWidth: '2',
+  strokeStyle: 'rgba(247, 206, 158, 1)'
+});
+drawPath(250, 250, 5, 160, {  // Increase the radius to 260
+  fillStyle: '#F6DFAD',
+  strokeStyle: 'rgba(255, 255, 255, 0)'
+});
+drawPath(250, 250, 5, 120, {  // Increase the radius to 220
+  fillStyle: '#F7D792',
+  strokeStyle: 'rgba(255, 255, 255, 0)'
+});
+drawPath(250, 250, 5, 110, {  // Increase the radius to 180
+  fillStyle: '#F7CF80',
+  strokeStyle: 'rgba(255, 255, 255, 0)'
+});
+drawPath(250, 250, 5, 100, {  // Increase the radius to 140
+  fillStyle: '#F8C96D',
+  strokeStyle: 'rgba(255, 255, 255, 0)'
+});
+drawPath(250, 250, 5, 80, {  // Increase the radius to 100
+  fillStyle: '#F8C662',
+  strokeStyle: 'rgba(255, 255, 255, 0)'
+});
+
+
+var coordinates = [
+    { x: 1650, y: 200 },
+    { x: 1600, y: 250 },
+    { x: 1700, y: 300 },
+    { x: 1500, y: 270 },
+    { x: 1620, y: 180 },
+    { x: 1660, y: 180 },
+    
+    // Add more coordinates as needed
+];
+
+drawPoints(coordinates);
+
+
+  
+
+  
+  
 
   // Drag and drop functionality
   const card = document.getElementById('draggableCard');

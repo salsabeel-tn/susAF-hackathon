@@ -1,6 +1,6 @@
 .pentagon-container {
     position: relative;
-    width: 1500px;
+    width: 2000px;
     height: 100vh;
     margin: 0 auto;
   }
@@ -21,3 +21,17 @@
     transform: translate(-50%, -50%);
     cursor: grab;
   }
+
+  .svg-pentagon {
+    width: 250px;
+    height: 250px;
+    margin: auto;
+    overflow: hidden;
+}
+.svg-pentagon canvas {
+    margin: -125px 0 0 -125px;
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    transform: scale(0.5);
+}
