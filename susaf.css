@@ -10,26 +10,41 @@
     height: 100%;
   }
 
-  .card {
-    width: 50px;
-    height: 50px;
-    background-color: gold;
-    border-radius: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: grab;
-  }
+ /* Update the styling for draggable cards */
+.draggable-card {
+  width: 200px; /* Set a fixed width */
+  height: auto; /* Allow height to adjust based on content */
+  background-color: #f9f9f9; /* Light background color */
+  border: 1px solid #ccc; /* Add a border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Add padding inside the card */
+  margin: 10px; /* Add margin around the card */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  cursor: grab; /* Change cursor on hover */
+}
 
-  .draggable-card {
-    min-width: 100px;
-    min-height: 100px;
-    background-color: gold;
-    border-radius: 10px;
-    display: inline-flex;
-    flex-direction: column;
-  }
+/* Style the title paragraph inside the card */
+.draggable-card p {
+  margin: 0; /* Remove default margin */
+  font-weight: bold; /* Make title bold */
+}
+
+/* Style the select menus */
+select {
+  width: 100%; /* Make select menus fill the width of the parent */
+  margin-top: 8px; /* Add space above select menus */
+  padding: 8px; /* Add padding */
+  border-radius: 5px; /* Rounded corners */
+  border: 1px solid #ccc; /* Add a border */
+  background-color: #fff; /* White background */
+}
+
+/* Style the range slider */
+.range-slider {
+  width: 100%; /* Make range slider fill the width of the parent */
+  margin-top: 8px; /* Add space above the range slider */
+}
+
 
   .svg-pentagon {
     width: 250px;
