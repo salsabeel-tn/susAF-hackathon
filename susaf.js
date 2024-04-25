@@ -34,32 +34,15 @@ const canvas = document.getElementById('pentagonCanvas');
 
   drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 200, 'rgba(144, 238, 144, 0.8)'); 
   drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 150, 'rgba(144, 238, 144, 0.5)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 100, 'rgba(144, 238, 144, 0.3)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 100, 'rgba(144, 238, 144, 0.3)');
 
-  
-function drawPath(x, y, n, r, style) {
-    var i, ang;
-    ang = Math.PI * 2 / n; // Rotation angle
-    ctx.save();
-    // Set style
-    for (var styleList in style) {
-        ctx[styleList] = style[styleList];
-    }
-    x_updated = canvas.width * 0.8  ;
-    y_updated = canvas.height * 0.5;
-    console.log(x_updated, y_updated);
-    ctx.translate(x_updated, y_updated);
-    ctx.moveTo(0, -r);
-    ctx.beginPath();
-    for (i = 0; i < n; i++) {
-        ctx.rotate(ang);
-        ctx.lineTo(0, -r);
-    }
-    ctx.closePath();
-    ctx.stroke();
-    ctx.fill();
-    ctx.restore();
-}
+  //visualisation pentagon
+  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 200, 'rgba(243, 231, 206, 1)');
+  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 170, 'rgba(246, 223, 173, 1)');
+  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 140, 'rgba(247, 215, 146, 1)');
+  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 110, 'rgba(247, 207, 128, 1)');
+  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 80, 'rgba(248, 201, 109, 1)');
+  drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 50, 'rgba(248, 198, 98, 1)');
 
 function drawPoints(coordinates) {
     ctx.save(); // Save the current canvas state
@@ -85,33 +68,6 @@ function drawPoints(coordinates) {
     }
     ctx.restore(); // Restore the saved canvas state
 }
-
-drawPath(250, 250, 5, 200, {  // Increase the radius to 300
-  fillStyle: 'rgba(243, 231, 206, 1)',
-  lineWidth: '2',
-  strokeStyle: 'rgba(247, 206, 158, 1)'
-});
-drawPath(250, 250, 5, 160, {  // Increase the radius to 260
-  fillStyle: '#F6DFAD',
-  strokeStyle: 'rgba(255, 255, 255, 0)'
-});
-drawPath(250, 250, 5, 120, {  // Increase the radius to 220
-  fillStyle: '#F7D792',
-  strokeStyle: 'rgba(255, 255, 255, 0)'
-});
-drawPath(250, 250, 5, 110, {  // Increase the radius to 180
-  fillStyle: '#F7CF80',
-  strokeStyle: 'rgba(255, 255, 255, 0)'
-});
-drawPath(250, 250, 5, 100, {  // Increase the radius to 140
-  fillStyle: '#F8C96D',
-  strokeStyle: 'rgba(255, 255, 255, 0)'
-});
-drawPath(250, 250, 5, 80, {  // Increase the radius to 100
-  fillStyle: '#F8C662',
-  strokeStyle: 'rgba(255, 255, 255, 0)'
-});
-
 
 var coordinates = [
     { x: 1650, y: 200 },
