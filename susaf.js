@@ -1,7 +1,5 @@
 const canvas = document.getElementById('pentagonCanvas');
   const ctx = canvas.getContext('2d');
-  console.log(canvas.offsetHeight)
-  console.log(canvas.offsetWidth)
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
 
@@ -23,18 +21,18 @@ const canvas = document.getElementById('pentagonCanvas');
     ctx.stroke();
   }
 
-  // Draw the main pentagon and two sub pentagons with different light colors
-  drawPentagon(ctx, {x: canvas.width * 0.2, y: canvas.height * 0.5}, 200, `rgba(255, 182, 193, 0.8)`); 
-  drawPentagon(ctx, {x: canvas.width * 0.2, y: canvas.height * 0.5}, 150, `rgba(255, 182, 193, 0.5)`); 
-  drawPentagon(ctx, {x: canvas.width * 0.2, y: canvas.height * 0.5}, 100, `rgba(255, 182, 193, 0.3)`);
+  // Draw the main pentagon and sub pentagons with different light colors
+  drawPentagon(ctx, {x: canvas.width * 0.1, y: canvas.height * 0.5}, 200, `rgba(255, 182, 193, 0.8)`); 
+  drawPentagon(ctx, {x: canvas.width * 0.1, y: canvas.height * 0.5}, 150, `rgba(255, 182, 193, 0.5)`); 
+  drawPentagon(ctx, {x: canvas.width * 0.1, y: canvas.height * 0.5}, 100, `rgba(255, 182, 193, 0.3)`);
 
-  drawPentagon(ctx, {x: canvas.width * 0.4, y: canvas.height * 0.5}, 200, 'rgba(173, 216, 230, 0.8)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.4, y: canvas.height * 0.5}, 150, 'rgba(173, 216, 230, 0.5)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.4, y: canvas.height * 0.5}, 100, 'rgba(173, 216, 230, 0.3)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.3, y: canvas.height * 0.5}, 200, 'rgba(173, 216, 230, 0.8)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.3, y: canvas.height * 0.5}, 150, 'rgba(173, 216, 230, 0.5)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.3, y: canvas.height * 0.5}, 100, 'rgba(173, 216, 230, 0.3)'); 
 
-  drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 200, 'rgba(144, 238, 144, 0.8)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 150, 'rgba(144, 238, 144, 0.5)'); 
-  drawPentagon(ctx, {x: canvas.width * 0.6, y: canvas.height * 0.5}, 100, 'rgba(144, 238, 144, 0.3)');
+  drawPentagon(ctx, {x: canvas.width * 0.5, y: canvas.height * 0.5}, 200, 'rgba(144, 238, 144, 0.8)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.5, y: canvas.height * 0.5}, 150, 'rgba(144, 238, 144, 0.5)'); 
+  drawPentagon(ctx, {x: canvas.width * 0.5, y: canvas.height * 0.5}, 100, 'rgba(144, 238, 144, 0.3)');
 
   //visualisation pentagon
   drawPentagon(ctx, {x: canvas.width * 0.8, y: canvas.height * 0.5}, 200, 'rgba(243, 231, 206, 1)');
@@ -83,58 +81,140 @@ var coordinates = [
 drawPoints(coordinates);
 
 
-  
 
-  
-  
+// Drag and drop functionality
+// const allCards = document.querySelectorAll('#draggableCard');
+// let active = false;
+// let currentX;
+// let currentY;
+// let initialX;
+// let initialY;
+// let xOffset = 0;
+// let yOffset = 0;
 
-  // Drag and drop functionality
-  const card = document.getElementById('draggableCard');
-  let active = false;
-  let currentX;
-  let currentY;
-  let initialX;
-  let initialY;
-  let xOffset = 0;
-  let yOffset = 0;
+// allCards.forEach(card => {
+//   card.addEventListener('mousedown', function(e) {
+//     dragStart(e);
+// })
+// })
 
-  card.addEventListener('mousedown', function(e) {
-    dragStart(e);
-  }, false);
-  window.addEventListener('mouseup', function(e) {
-    dragEnd(e);
-  }, false);
-  window.addEventListener('mousemove', function(e) {
-    drag(e);
-  }, false);
+// window.addEventListener('mouseup', function(e) {
+//   dragEnd(e);
+// }, false);
+// window.addEventListener('mousemove', function(e) {
+//   drag(e);
+// }, false);
 
-  function dragStart(e) {
-    initialX = e.clientX - xOffset;
-    initialY = e.clientY - yOffset;
-    if (e.target === card) {
-      active = true;
-      card.style.cursor = 'grabbing';
+//   function dragStart(e) {
+//     initialX = e.clientX - xOffset;
+//     initialY = e.clientY - yOffset;
+//     allCards.forEach(card => {
+//       if (e.target === card) {
+//         active = true;
+//         card.style.cursor = 'grabbing';
+//       }
+//     })
+//   }
+
+//   function dragEnd(e) {
+//     initialX = currentX;
+//     initialY = currentY;
+//     active = false;
+//     allCards.forEach(card => {
+//       card.style.cursor = 'grab';
+//     })
+//   }
+
+//   function drag(e) {
+//     if (active) {
+//       e.preventDefault();
+//       currentX = e.clientX - initialX;
+//       currentY = e.clientY - initialY;
+//       xOffset = currentX;
+//       yOffset = currentY;
+//       allCards.forEach(card => {
+//         setTranslate(currentX, currentY, card);
+//       })
+//     }
+//   }
+
+//   function setTranslate(xPos, yPos, el) {
+//     el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+//   }
+
+// Function to create a new draggable card
+function createCard() {
+    const card = document.createElement('div');
+    card.classList.add('draggable-card');
+    card.innerHTML = '<p contenteditable="true">Title</p>';
+    const selectMenuCategory = document.createElement('select');
+    selectMenuCategory.innerHTML = `
+        <option value="environmental">Environmental</option>
+        <option value="social">Social</option>
+        <option value="economic">Economic</option>
+        <option value="individual">Individual</option>
+        <option value="technical">Technical</option>
+    `;
+    const selectMenuEffect = document.createElement('select');
+    selectMenuEffect.innerHTML = `
+        <option value="Direct">Direct</option>
+        <option value="Indirect">Indirect</option>
+        <option value="Structural">Structural</option>
+    `;
+    const rangeSlider = document.createElement('input');
+    rangeSlider.type = 'range';
+    rangeSlider.min = 1;
+    rangeSlider.max = 10;
+    rangeSlider.value = 5; // Default value
+    rangeSlider.classList.add('range-slider');
+    card.appendChild(selectMenuCategory);
+    card.appendChild(selectMenuEffect);
+    card.appendChild(rangeSlider);
+    document.body.appendChild(card);
+
+    // Make the card draggable
+    let active = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    card.addEventListener('mousedown', dragStart, false);
+    window.addEventListener('mouseup', dragEnd, false);
+    window.addEventListener('mousemove', drag, false);
+
+    function dragStart(e) {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+        active = true;
+        card.style.cursor = 'grabbing';
     }
-  }
 
-  function dragEnd(e) {
-    initialX = currentX;
-    initialY = currentY;
-    active = false;
-    card.style.cursor = 'grab';
-  }
-
-  function drag(e) {
-    if (active) {
-      e.preventDefault();
-      currentX = e.clientX - initialX;
-      currentY = e.clientY - initialY;
-      xOffset = currentX;
-      yOffset = currentY;
-      setTranslate(currentX, currentY, card);
+    function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
+        active = false;
+        card.style.cursor = 'grab';
     }
-  }
 
-  function setTranslate(xPos, yPos, el) {
-    el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
-  }
+    function drag(e) {
+        if (active) {
+            e.preventDefault();
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+            xOffset = currentX;
+            yOffset = currentY;
+            setTranslate(currentX, currentY, card);
+        }
+    }
+
+    function setTranslate(xPos, yPos, el) {
+        el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+    }
+}
+
+// Event listener for the create card button
+const createCardBtn = document.getElementById('createCardBtn');
+createCardBtn.addEventListener('click', createCard);

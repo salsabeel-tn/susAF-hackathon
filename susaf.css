@@ -1,7 +1,7 @@
 .pentagon-container {
     position: relative;
     width: 2000px;
-    height: 100vh;
+    height: 800px;
     margin: 0 auto;
   }
 
@@ -20,6 +20,15 @@
     left: 50%;
     transform: translate(-50%, -50%);
     cursor: grab;
+  }
+
+  .draggable-card {
+    min-width: 100px;
+    min-height: 100px;
+    background-color: gold;
+    border-radius: 10px;
+    display: inline-flex;
+    flex-direction: column;
   }
 
   .svg-pentagon {
